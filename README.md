@@ -11,6 +11,8 @@ The plugin has one goal:
 
 - `heroku:deploy-docker`: build, push and release a Docker image to Heroku
 
+Optionally define the ConfigVars for the application
+
 ## How to use it
 
 Add the following to your `pom.xml`
