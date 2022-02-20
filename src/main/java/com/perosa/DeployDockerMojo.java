@@ -25,9 +25,14 @@ public class DeployDockerMojo extends AbstractHerokuDockerMojo {
             throw new MojoExecutionException("Undefined processType");
         }
 
-
+        // push
         execCommand("heroku", "container:push", this.processType, "-a", this.appName);
-        // execCommand("heroku", "container:release", this.processType, "-a", this.appName);
+        // release
+        execCommand("heroku", "container:release", this.processType, "-a", this.appName);
+        // set config vars
+        this.configVars.entrySet().stream()
+                .forEach(e -> execCommand("heroku", "config:set",
+                        e.getKey() + "=" + e.getValue(), "-a", this.appName));
 
     }
 }

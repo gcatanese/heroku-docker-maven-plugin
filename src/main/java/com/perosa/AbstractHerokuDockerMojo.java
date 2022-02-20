@@ -8,6 +8,8 @@ import org.apache.maven.plugins.annotations.Parameter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * Heroku Docker operations
@@ -16,11 +18,23 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
 
     private Log log;
 
+    /**
+     * Heroku application name
+     */
     @Parameter(name = "appName")
     protected String appName = null;
 
+    /**
+     * Type of process
+     */
     @Parameter(name = "processType")
     protected String processType = null;
+
+    /**
+     * ConfigVars for the application
+     */
+    @Parameter(name="configVars")
+    protected Map<String, String> configVars = Collections.emptyMap();
 
     public void setLog(Log log) {
         this.log = log;
