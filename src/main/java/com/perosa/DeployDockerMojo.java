@@ -34,5 +34,7 @@ public class DeployDockerMojo extends AbstractHerokuDockerMojo {
                 .forEach(e -> execCommand("heroku", "config:set",
                         e.getKey() + "=" + e.getValue(), "-a", this.appName));
 
+        printAppInfo();
+
     }
 }
