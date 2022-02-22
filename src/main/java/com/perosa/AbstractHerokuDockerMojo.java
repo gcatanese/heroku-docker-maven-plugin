@@ -74,12 +74,15 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
 
-            getCustomLog().warn(stdError.lines().collect(Collectors.joining()));
+            String stdErr = stdError.lines().collect(Collectors.joining());
+            if(!stdErr.isEmpty()) {
+                getCustomLog().warn(stdErr);
+            }
 
             AppInfo appInfo = new AppInfo(stdInput.lines().collect(Collectors.joining()));
 
-            getCustomLog().info("Deployed " + appInfo.getName() + " (" + appInfo.getRegion() + ")" +
-                    " url: " + appInfo.getWeb_url());
+            getCustomLog().info("Deployed " + appInfo.getName() + " (region " + appInfo.getRegion() + ")" +
+                    " " + appInfo.getWeb_url());
 
         } catch (Exception e) {
             getCustomLog().error(e.getMessage(), e);
