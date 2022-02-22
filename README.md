@@ -9,7 +9,7 @@ This plugin builds and pushes Docker images to Heroku.
 
 The plugin has one goal:
 
-- `heroku:deploy-docker`: build, push and release a Docker image to Heroku
+- `heroku-docker:docker`: build, push and release a Docker image to Heroku
 
 Optionally define the ConfigVars for the application
 
@@ -35,3 +35,9 @@ Add the following to your `pom.xml`
     </plugin>
   </plugins>
 </build>
+
+```
+Run 
+```
+  mvn heroku-docker:deploy
+```
