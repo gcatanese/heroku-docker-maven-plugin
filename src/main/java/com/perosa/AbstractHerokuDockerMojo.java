@@ -52,8 +52,8 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
 
     /**
      * Execute command
-     * @param parameters
-     * @throws IOException
+     * @param parameters Command (with parameters) to execute
+     * @throws IOException throws IOException when command execution fails
      */
     protected void execCommand(String... parameters) throws IOException {
 
