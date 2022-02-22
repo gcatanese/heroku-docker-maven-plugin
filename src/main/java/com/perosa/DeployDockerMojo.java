@@ -10,7 +10,7 @@ import java.util.Map;
  *
  * @phase process-sources
  */
-@Mojo(name = "deploy-docker")
+@Mojo(name = "deploy")
 public class DeployDockerMojo extends AbstractHerokuDockerMojo {
 
     public void execute() throws MojoExecutionException {

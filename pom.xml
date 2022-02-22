@@ -80,7 +80,7 @@
                 <version>3.6.4</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <goalPrefix>heroku</goalPrefix>
+                    <goalPrefix>heroku-docker</goalPrefix>
                 </configuration>
             </plugin>
         </plugins>
