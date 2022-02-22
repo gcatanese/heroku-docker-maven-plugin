@@ -8,7 +8,6 @@ import java.util.Map;
 /**
  * Deploy to Heroku Docker Registry
  *
- * @phase process-sources
  */
 @Mojo(name = "deploy")
 public class DeployDockerMojo extends AbstractHerokuDockerMojo {
