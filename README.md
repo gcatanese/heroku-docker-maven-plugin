@@ -2,18 +2,17 @@
 
 [![](https://badgen.net/github/license/gcatanese/heroku-docker-maven-plugin)](LICENSE)
 [![](https://badgen.net/maven/v/maven-central/com.perosa/heroku-docker-maven-plugin)](https://search.maven.org/artifact/com.perosa/heroku-docker-maven-plugin)
+[![](https://badgen.net/circleci/github/gcatanese/heroku-docker-maven-plugin/main)](https://circleci.com/gh/gcatanese/heroku-docker-maven-plugin/tree/main)
 
-Maven plugin to deploy Docker apps on Heroku
-
-This plugin builds and pushes Docker images to Heroku.
+Maven plugin to build a Docker image and deploy it to Heroku
 
 The plugin has one goal:
 
-- `heroku-docker:docker`: build, push and release a Docker image to Heroku
+- `heroku-docker:deploy`: build, push and release a Docker image to Heroku
 
-Optionally define the ConfigVars for the application
+Optionally it is possible to define the ConfigVars for the application
 
-## How to use it
+## How to use
 
 Add the following to your `pom.xml`
 
@@ -35,9 +34,58 @@ Add the following to your `pom.xml`
     </plugin>
   </plugins>
 </build>
-
 ```
+
 Run 
 ```
   mvn heroku-docker:deploy
 ```
+
+## How to use with Maven multi-module project
+
+Here is an example of a Maven multi-project where each child is deployed in its on Dyno
+(think of a microservices architecture)
+
+In the parent POM add the following to your `pom.xml`
+
+```xml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>com.perosa</groupId>
+      <artifactId>heroku-docker-maven-plugin</artifactId>
+      <version>1.0.0</version>
+    </plugin>
+  </plugins>
+</build>
+```
+
+Configure each sub-module accordingly
+
+```xml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>com.perosa</groupId>
+      <artifactId>heroku-docker-maven-plugin</artifactId>
+      <version>1.0.0</version>
+      <configuration>
+        <appName>serviceOne</appName>
+        <processType>web</processType>
+        <configVars>
+            <VAR_ONE>SomeValue</VAR_ONE>
+            <VAR_TWO>SomeOtherValue</VAR_TWO>
+          </configVars>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+
+```
+
+In the root of the project run the following
+```
+  mvn heroku-docker:deploy
+```
+
+
