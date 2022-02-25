@@ -1,4 +1,4 @@
-# heroku-docker-maven-plugin
+# Heroku Docker Maven Plugin
 
 [![](https://badgen.net/github/license/gcatanese/heroku-docker-maven-plugin)](LICENSE)
 [![](https://badgen.net/maven/v/maven-central/com.tweesky.cloudtools/heroku-docker-maven-plugin)](https://search.maven.org/artifact/com.tweesky.cloudtools/heroku-docker-maven-plugin)
