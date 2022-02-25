@@ -1,7 +1,7 @@
 # heroku-docker-maven-plugin
 
 [![](https://badgen.net/github/license/gcatanese/heroku-docker-maven-plugin)](LICENSE)
-[![](https://badgen.net/maven/v/maven-central/com.perosa/heroku-docker-maven-plugin)](https://search.maven.org/artifact/com.perosa/heroku-docker-maven-plugin)
+[![](https://badgen.net/maven/v/maven-central/com.tweesky.cloudtools/heroku-docker-maven-plugin)](https://search.maven.org/artifact/com.perosa/heroku-docker-maven-plugin)
 [![](https://badgen.net/circleci/github/gcatanese/heroku-docker-maven-plugin/main)](https://circleci.com/gh/gcatanese/heroku-docker-maven-plugin/tree/main)
 
 Maven plugin to build a Docker image and deploy it to Heroku
@@ -17,19 +17,20 @@ Optionally it is possible to define the ConfigVars for the application
 Add the following to your `pom.xml`
 
 ```xml
+
 <build>
   <plugins>
     <plugin>
-      <groupId>com.perosa</groupId>
+      <groupId>com.tweesky.cloudtools</groupId>
       <artifactId>heroku-docker-maven-plugin</artifactId>
       <version>1.0.0</version>
       <configuration>
         <appName>myAppName</appName>
         <processType>web</processType>
         <configVars>
-            <VAR_ONE>SomeValue</VAR_ONE>
-            <VAR_TWO>SomeOtherValue</VAR_TWO>
-          </configVars>
+          <VAR_ONE>SomeValue</VAR_ONE>
+          <VAR_TWO>SomeOtherValue</VAR_TWO>
+        </configVars>
       </configuration>
     </plugin>
   </plugins>
@@ -54,10 +55,11 @@ For example a microservices architecture defining each service as a sub-module:
 In the parent POM add the following to your `pom.xml`
 
 ```xml
+
 <build>
   <plugins>
     <plugin>
-      <groupId>com.perosa</groupId>
+      <groupId>com.tweeskycom.tweesky</groupId>
       <artifactId>heroku-docker-maven-plugin</artifactId>
       <version>1.0.0</version>
     </plugin>
@@ -68,19 +70,20 @@ In the parent POM add the following to your `pom.xml`
 Configure each sub-module accordingly
 
 ```xml
+
 <build>
   <plugins>
     <plugin>
-      <groupId>com.perosa</groupId>
+      <groupId>com.tweeskycom.tweesky</groupId>
       <artifactId>heroku-docker-maven-plugin</artifactId>
       <version>1.0.0</version>
       <configuration>
         <appName>serviceOne</appName>
         <processType>web</processType>
         <configVars>
-            <VAR_ONE>SomeValue</VAR_ONE>
-            <VAR_TWO>SomeOtherValue</VAR_TWO>
-          </configVars>
+          <VAR_ONE>SomeValue</VAR_ONE>
+          <VAR_TWO>SomeOtherValue</VAR_TWO>
+        </configVars>
       </configuration>
     </plugin>
   </plugins>

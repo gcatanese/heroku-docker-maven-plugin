@@ -1,4 +1,4 @@
-package com.perosa.model;
+package com.tweesky.cloudtools.model;
 
 import org.json.JSONObject;
 

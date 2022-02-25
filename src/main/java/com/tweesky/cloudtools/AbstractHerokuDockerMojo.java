@@ -1,6 +1,6 @@
-package com.perosa;
+package com.tweesky.cloudtools;
 
-import com.perosa.model.AppInfo;
+import com.tweesky.cloudtools.model.AppInfo;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
