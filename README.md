@@ -43,8 +43,13 @@ Run
 
 ## How to use with Maven multi-module project
 
-Here is an example of a Maven multi-project where each child is deployed in its on Dyno
-(think of a microservices architecture)
+The plugin can be convenient for a Maven multi-project where each child is deployed in its on Dyno.
+
+For example a microservices architecture defining each service as a sub-module:
+- Parent POM
+    - service1 (web dyno)
+    - service2 (web dyno)
+    - service3 (worker dyno)
 
 In the parent POM add the following to your `pom.xml`
 
