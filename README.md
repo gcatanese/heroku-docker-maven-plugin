@@ -66,7 +66,7 @@ In the parent POM add the following to your `pom.xml`
 <build>
   <plugins>
     <plugin>
-      <groupId>com.tweeskycom.cloudtools</groupId>
+      <groupId>com.tweesky.cloudtools</groupId>
       <artifactId>heroku-docker-maven-plugin</artifactId>
       <version>1.0.0</version>
     </plugin>
@@ -81,7 +81,7 @@ Configure each sub-module accordingly
 <build>
   <plugins>
     <plugin>
-      <groupId>com.tweeskycom.cloudtools</groupId>
+      <groupId>com.tweesky.cloudtools</groupId>
       <artifactId>heroku-docker-maven-plugin</artifactId>
       <version>1.0.0</version>
       <configuration>
