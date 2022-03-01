@@ -6,9 +6,10 @@
 
 Maven plugin to build a Docker image and deploy it to Heroku.  
 
-The plugin has one goal:
+The plugin has several goals:
 
-- `heroku-docker:deploy`: build, push and release a Docker image to Heroku
+- `heroku-docker:deploy`: build, push and release the Docker image(s) to Heroku
+- `heroku-docker:info`: print info about the Heroku application(s) defined in the Maven POM file(s)
 
 Optionally it is possible to define the ConfigVars for the application
 
