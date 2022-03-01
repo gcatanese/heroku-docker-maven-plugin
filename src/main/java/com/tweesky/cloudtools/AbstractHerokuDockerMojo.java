@@ -66,6 +66,10 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
     }
 
     protected void printAppInfo() throws MojoExecutionException {
+        this.printAppInfo(false);
+    }
+
+    protected void printAppInfo(boolean extended) throws MojoExecutionException {
         try {
 
             String[] cmd = new String[]{"heroku", "apps:info", "-j", "-a", this.appName};
@@ -81,8 +85,12 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
 
             AppInfo appInfo = new AppInfo(stdInput.lines().collect(Collectors.joining()));
 
-            getCustomLog().info("Deployed " + appInfo.getName() + " (region " + appInfo.getRegion() + ")" +
+            getCustomLog().info(appInfo.getName() + " (region " + appInfo.getRegion() + ")" +
                     " " + appInfo.getWeb_url());
+            if(extended) {
+                getCustomLog().info("command: " + appInfo.getCommand() +
+                        " repo_size: " + appInfo.getRepo_size());
+            }
 
         } catch (Exception e) {
             getCustomLog().error(e.getMessage(), e);
