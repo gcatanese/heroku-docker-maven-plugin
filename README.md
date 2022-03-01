@@ -10,6 +10,8 @@ The plugin has several goals:
 
 - `heroku-docker:deploy`: build, push and release the Docker image(s) to Heroku
 - `heroku-docker:info`: print info about the Heroku application(s) defined in the Maven POM file(s)
+- `heroku-docker:start`: start (scale up) the Heroku application(s) defined in the Maven POM file(s)
+- `heroku-docker:stop`: stop (scale down) the Heroku application(s) defined in the Maven POM file(s)
 
 Optionally it is possible to define the ConfigVars for the application
 

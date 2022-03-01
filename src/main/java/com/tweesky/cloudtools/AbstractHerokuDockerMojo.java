@@ -30,7 +30,7 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
     protected String appName = null;
 
     /**
-     * Type of process
+     * Type of process (web | worker)
      */
     @Parameter(name = "processType")
     protected String processType = null;
@@ -52,23 +52,33 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
 
     /**
      * Execute command
+     *
      * @param parameters Command (with parameters) to execute
      * @throws IOException throws IOException when command execution fails
      */
     protected void execCommand(String... parameters) throws IOException {
 
         getCustomLog().info("Running " + String.join(" ", parameters));
-        getCustomLog().info("Working dir " + mavenProject.getBasedir());
+        getCustomLog().debug("Working dir " + mavenProject.getBasedir());
 
         Process proc = Runtime.getRuntime().exec(parameters, null, mavenProject.getBasedir());
         logProcessOutput(proc);
 
     }
 
+    /**
+     *  Print Heroku application info
+     * @throws MojoExecutionException
+     */
     protected void printAppInfo() throws MojoExecutionException {
         this.printAppInfo(false);
     }
 
+    /**
+     * Print Heroku application info
+     * @param extended when true include extra information (i.e. command to run the Dyno)
+     * @throws MojoExecutionException
+     */
     protected void printAppInfo(boolean extended) throws MojoExecutionException {
         try {
 
@@ -79,7 +89,7 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
             BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
 
             String stdErr = stdError.lines().collect(Collectors.joining());
-            if(!stdErr.isEmpty()) {
+            if (!stdErr.isEmpty()) {
                 getCustomLog().warn(stdErr);
             }
 
@@ -87,10 +97,51 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
 
             getCustomLog().info(appInfo.getName() + " (region " + appInfo.getRegion() + ")" +
                     " " + appInfo.getWeb_url());
-            if(extended) {
+            if (extended) {
                 getCustomLog().info("command: " + appInfo.getCommand() +
                         " repo_size: " + appInfo.getRepo_size());
             }
+
+        } catch (Exception e) {
+            getCustomLog().error(e.getMessage(), e);
+            throw new MojoExecutionException("");
+        }
+    }
+
+    /**
+     * Scale up the Dyno to 1 instance
+     * @throws MojoExecutionException
+     */
+    protected void start() throws MojoExecutionException {
+        scale("1");
+    }
+
+    /**
+     * Scale down the Dyno to 0 instances
+     * @throws MojoExecutionException
+     */
+    protected void stop() throws MojoExecutionException {
+        scale("0");
+    }
+
+    // perform the Heroku scaling
+    private void scale(String numOfInstances) throws MojoExecutionException {
+        try {
+
+            String[] cmd = new String[]{"heroku", "ps:scale", this.processType + "=" + numOfInstances, "-a", this.appName};
+            getCustomLog().info("Running " + String.join(" ", cmd));
+
+            Process proc = Runtime.getRuntime().exec(cmd);
+
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+
+            String stdErr = stdError.lines().collect(Collectors.joining());
+            if (!stdErr.isEmpty()) {
+                getCustomLog().warn(stdErr);
+            }
+
+            getCustomLog().info("Stopping " + this.appName + "(" + this.processType + ")");
 
         } catch (Exception e) {
             getCustomLog().error(e.getMessage(), e);
