@@ -19,7 +19,7 @@ Optionally it is possible to define the ConfigVars for the application
 
 The Heroku CLI must be available in the environment/hosting running the Maven plugins
 
-## How to use
+## How to use: deploy
 
 Add the following to your `pom.xml`
 
@@ -101,6 +101,16 @@ Configure each sub-module accordingly
 In the root of the project run the following
 ```
   mvn heroku-docker:deploy
+```
+
+## How to use: start and stop
+
+The plugin is convenient to start and stop multiple Heroku dynos at once, for example scale down the Dynos to
+avoid using unnecessary computation time.
+
+In the root of the project run the following
+```
+  mvn heroku-docker:stop
 ```
 
 ## How to use on CI/CD
