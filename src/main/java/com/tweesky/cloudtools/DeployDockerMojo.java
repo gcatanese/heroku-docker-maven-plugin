@@ -1,6 +1,5 @@
 package com.tweesky.cloudtools;
 
-import com.tweesky.cloudtools.AbstractHerokuDockerMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 
@@ -31,14 +30,14 @@ public class DeployDockerMojo extends AbstractHerokuDockerMojo {
             }
 
             // push
-            //execCommand("heroku", "container:push", this.processType, "-a", this.appName);
+            execCommand("heroku", "container:push", this.processType, "-a", this.appName);
             // release
-            //execCommand("heroku", "container:release", this.processType, "-a", this.appName);
+            execCommand("heroku", "container:release", this.processType, "-a", this.appName);
             // set config vars
-//            for (Map.Entry<String, String> e : this.configVars.entrySet()) {
-//                execCommand("heroku", "config:set",
-//                        e.getKey() + "=" + e.getValue(), "-a", this.appName);
-//            }
+            for (Map.Entry<String, String> e : this.configVars.entrySet()) {
+                execCommand("heroku", "config:set",
+                        e.getKey() + "=" + e.getValue(), "-a", this.appName);
+            }
 
             printAppInfo();
 
