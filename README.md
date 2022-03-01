@@ -13,6 +13,10 @@ The plugin has several goals:
 
 Optionally it is possible to define the ConfigVars for the application
 
+## Pre-requisites
+
+The Heroku CLI must be available in the environment/hosting running the Maven plugins
+
 ## How to use
 
 Add the following to your `pom.xml`
@@ -97,4 +101,22 @@ In the root of the project run the following
   mvn heroku-docker:deploy
 ```
 
+## How to use on CI/CD
 
+The Maven plugin can be used with your CI/CD tool
+
+### Github Actions
+
+Login into the Heroku Docker Registry then invoke the Maven plugin:
+```
+    - name: Heroku Container Registry login
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:login
+    - name: Build with Maven
+      run: mvn -B heroku-docker:deploy
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+```
+
+See full [example](https://github.com/gcatanese/MavenMultiModule/blob/main/.github/workflows/maven.yml) of the workflow
