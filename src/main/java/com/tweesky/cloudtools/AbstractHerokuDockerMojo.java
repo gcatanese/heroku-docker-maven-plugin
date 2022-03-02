@@ -24,9 +24,9 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
     protected MavenProject mavenProject;
 
     /**
-     * Heroku application name
+     * Heroku application's name
      */
-    @Parameter(name = "appName", required = false)
+    @Parameter(name = "appName")
     protected String appName = null;
 
     /**
@@ -169,7 +169,7 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
         BufferedReader stdError = new BufferedReader(new
                 InputStreamReader(proc.getErrorStream()));
 
-        String s = null;
+        String s;
 
         // standard output
         while ((s = stdInput.readLine()) != null) {
