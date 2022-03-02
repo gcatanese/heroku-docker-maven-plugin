@@ -6,4 +6,4 @@ workflows:
   maven_test:
     jobs:
       - maven/test
-        command: 'package'
+          command: 'package'
