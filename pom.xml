@@ -5,7 +5,7 @@
 
     <groupId>com.tweesky.cloudtools</groupId>
     <artifactId>heroku-docker-maven-plugin</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <url>http://github.com/gcatanese/heroku-docker-maven-plugin</url>
