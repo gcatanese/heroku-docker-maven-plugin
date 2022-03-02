@@ -12,11 +12,11 @@ public class CustomPluginLogger {
 
     private static String mavenProjectName;
 
-    public CustomPluginLogger(String mavenProjectName) {
-        this.mavenProjectName = mavenProjectName;
+    public CustomPluginLogger(String name) {
+        mavenProjectName = name;
 
-        if (this.log == null) {
-            this.log = new SystemStreamLog();
+        if (log == null) {
+            log = new SystemStreamLog();
         }
     }
 
