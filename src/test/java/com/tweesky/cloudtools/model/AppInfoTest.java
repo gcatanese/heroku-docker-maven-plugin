@@ -10,9 +10,7 @@ class AppInfoTest {
     void isNotJson() {
         String json = "";
 
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            AppInfo appInfo = new AppInfo(json);
-        });
+        Assertions.assertThrows(RuntimeException.class, () -> new AppInfo(json));
     }
 
     @Test
