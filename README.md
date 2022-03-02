@@ -2,7 +2,7 @@
 
 [![](https://badgen.net/github/license/gcatanese/heroku-docker-maven-plugin)](LICENSE)
 [![](https://badgen.net/maven/v/maven-central/com.tweesky.cloudtools/heroku-docker-maven-plugin)](https://repo1.maven.org/maven2/com/tweesky/cloudtools/heroku-docker-maven-plugin/)
-[![](https://badgen.net/circleci/github/gcatanese/heroku-docker-maven-plugin/main)](https://circleci.com/gh/gcatanese/heroku-docker-maven-plugin/tree/main)
+[![](https://badgen.net/circleci/github/gcatanese/heroku-docker-maven-plugin/main?cache=300)](https://circleci.com/gh/gcatanese/heroku-docker-maven-plugin/tree/main)
 
 Maven plugin to build multiple Docker images and deploy them to Heroku.  
 
