@@ -93,8 +93,6 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
             String stdErr = stdError.lines().collect(Collectors.joining());
             if (!stdErr.isEmpty()) {
                 getCustomLog().warn(stdErr);
-                // abort command
-                throw new MojoExecutionException("Error executing printAppInfo for app " + this.appName);
             }
 
             String output = stdInput.lines().collect(Collectors.joining());
@@ -147,8 +145,6 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
             String stdErr = stdError.lines().collect(Collectors.joining());
             if (!stdErr.isEmpty()) {
                 getCustomLog().warn(stdErr);
-                // abort command
-                throw new MojoExecutionException("Error executing scale(" + numOfInstances + ") for app " + this.appName);
             }
 
             getCustomLog().info("Stopping " + this.appName + "(" + this.processType + ")");
