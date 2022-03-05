@@ -67,7 +67,8 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
     }
 
     /**
-     *  Print Heroku application info
+     * Print Heroku application info
+     *
      * @throws MojoExecutionException
      */
     protected void printAppInfo() throws MojoExecutionException {
@@ -76,6 +77,7 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
 
     /**
      * Print Heroku application info
+     *
      * @param extended when true include extra information (i.e. command to run the Dyno)
      * @throws MojoExecutionException
      */
@@ -91,9 +93,13 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
             String stdErr = stdError.lines().collect(Collectors.joining());
             if (!stdErr.isEmpty()) {
                 getCustomLog().warn(stdErr);
+                // abort command
+                throw new MojoExecutionException("Error executing printAppInfo for app " + this.appName);
             }
 
-            AppInfo appInfo = new AppInfo(stdInput.lines().collect(Collectors.joining()));
+            String output = stdInput.lines().collect(Collectors.joining());
+            //getCustomLog().info(output);
+            AppInfo appInfo = new AppInfo(output);
 
             getCustomLog().info(appInfo.getName() + " (region " + appInfo.getRegion() + ")" +
                     " " + appInfo.getWeb_url());
@@ -110,6 +116,7 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
 
     /**
      * Scale up the Dyno to 1 instance
+     *
      * @throws MojoExecutionException
      */
     protected void start() throws MojoExecutionException {
@@ -118,6 +125,7 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
 
     /**
      * Scale down the Dyno to 0 instances
+     *
      * @throws MojoExecutionException
      */
     protected void stop() throws MojoExecutionException {
@@ -139,6 +147,8 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
             String stdErr = stdError.lines().collect(Collectors.joining());
             if (!stdErr.isEmpty()) {
                 getCustomLog().warn(stdErr);
+                // abort command
+                throw new MojoExecutionException("Error executing scale(" + numOfInstances + ") for app " + this.appName);
             }
 
             getCustomLog().info("Stopping " + this.appName + "(" + this.processType + ")");
@@ -177,7 +187,7 @@ public abstract class AbstractHerokuDockerMojo extends AbstractMojo {
         }
         // standard error (if any)
         while ((s = stdError.readLine()) != null) {
-            getCustomLog().debug(s);
+            getCustomLog().warn(s);
         }
 
     }
