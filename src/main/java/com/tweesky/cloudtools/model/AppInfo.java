@@ -22,8 +22,12 @@ public class AppInfo {
 
         this.setName(myJson.getJSONObject("app").getString("name"));
         this.setRegion(myJson.getJSONObject("app").getJSONObject("region").getString("name"));
-        this.setWeb_url(myJson.getJSONObject("app").getString("web_url"));
-        this.setRepo_size(myJson.getJSONObject("app").getInt("repo_size"));
+        if(!myJson.getJSONObject("app").isNull("web_url")) {
+            this.setWeb_url(myJson.getJSONObject("app").getString("web_url"));
+        }
+        if(!myJson.getJSONObject("app").isNull("repo_size")) {
+            this.setRepo_size(myJson.getJSONObject("app").getInt("repo_size"));
+        }
         if(myJson.getJSONArray("dynos") != null && !myJson.getJSONArray("dynos").isEmpty()) {
             this.setCommand(myJson.getJSONArray("dynos").getJSONObject(0).getString("command"));
         }
