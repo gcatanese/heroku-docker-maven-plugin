@@ -17,7 +17,7 @@ Optionally it is possible to define the ConfigVars for the application
 
 ## Pre-requisites
 
-The Heroku CLI must be available in the environment/hosting running the Maven plugins
+The Heroku CLI must be available in the environment/hosting running the Maven plugin.
 
 ## How to use: deploy
 
